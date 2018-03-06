@@ -36,17 +36,17 @@
 						</div>
 					</form>
 					<!-- ko if: currentInterviewee() != null -->
-					<p class="h1 " data-bind="text: currentWelcomeMessage"></p>
+					<p class="h1" data-bind="text: currentWelcomeMessage"></p>
 					<!-- /ko -->
 				</div>
 				<div class="col-6">
 					<div class="card">
-					<div class="card-body">
-					<p class="text-secondary">Visitantes Anteriores</p>
-					<!-- ko foreach: listOfInterviewees -->
-						<div data-bind="text: intervieweeName + ' - ' + intervieweeCountry + ' - ' + intervieweeBirthdate.format('DD/MM/YYYY')"></div>
-					<!-- /ko -->
-					</div>
+						<div class="card-body">
+							<p class="text-secondary">Visitantes Anteriores</p>
+							<!-- ko foreach: listOfInterviewees -->
+								<div data-bind="text: intervieweeName + ' - ' + intervieweeCountry + ' - ' + intervieweeBirthdate.format('DD/MM/YYYY'), click: $root.currentInterviewee"></div>
+							<!-- /ko -->
+						</div>
 					</div>
 				</div>
 			</div>
