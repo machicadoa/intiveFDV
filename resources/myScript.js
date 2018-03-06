@@ -6,7 +6,7 @@ $(document).ready( function() {
 			var month = current.intervieweeBirthdate.format('MMMM');
 			
 			var years = moment().year() - current.intervieweeBirthdate.year();
-			return 'Hola ' + current.intervieweeName + ' de ' + current.intervieweeCountry + '. el día ' + day + ' de ' + month + ' tendrás ' + years + '.';
+			return 'Hola ' + current.intervieweeName + ' de ' + current.intervieweeCountry + '. El día ' + day + ' de ' + month + ' tendrás ' + years + '.';
 			}, this),
 		
 		currentInterviewee: ko.observable(),
