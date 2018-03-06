@@ -1,20 +1,27 @@
 $(document).ready( function() {
 	var myViewModel = {
-		currentWelcomeMessage : 'Hola {nombre} de {pais}. el día {día} del {mes} tendrás {años}',
-		currentInterviewee: {
-			name: null,
-			country: null,
-			birthdate: null
-		},
+		currentWelcomeMessage : ko.pureComputed(function() {
+			var current = myViewModel.currentInterviewee();
+			var day = current.intervieweeBirthdate.format('DD');
+			var month = current.intervieweeBirthdate.format('MMMM');
+			
+			var years = moment().year() - current.intervieweeBirthdate.year();
+			return 'Hola ' + current.intervieweeName + ' de ' + current.intervieweeCountry + '. el día ' + day + ' de ' + month + ' tendrás ' + years + '.';
+			}, this),
+		
+		currentInterviewee: ko.observable(),
 		
 		listOfInterviewees: ko.observableArray(),
 		
 		countryCandidates: ko.observableArray(),
 		
 		addInterviewee: function (form){
-			if (moment(form.birthdate.value, 'DD/MM/YYYY',true).isValid()){
-				var newItem = new Interviewee(form.name.value, form.birthdate.value, form.country.selectedOptions[0].text);
+			var date = moment(form.birthdate.value, 'DD/MM/YYYY', 'es', true);
+			if (date.isValid()){
+				var newItem = new Interviewee(form.name.value, date, form.country.selectedOptions[0].text);
+				myViewModel.currentInterviewee(newItem);
 				myViewModel.listOfInterviewees.push(newItem);
+				form.reset();
 			} else {
 				alert("Fecha Inválida");
 			}

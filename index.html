@@ -3,14 +3,14 @@
 		<link rel="stylesheet" href="resources/styles.css">
 		<script type='text/javascript' src="http://knockoutjs.com/downloads/knockout-3.4.2.js"></script>
 		<script type='text/javascript' src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-		<script type='text/javascript' src="http://momentjs.com/downloads/moment.min.js"></script>
+		<script type='text/javascript' src="https://momentjs.com/downloads/moment-with-locales.js"></script>
 		<script type='text/javascript' src="resources/myScript.js"></script>
 		<meta charset="UTF-8"> 
 		<title>Ejercicio Intive</title>
 	</head>
 	<body>
 		<h1>Ejercicio Intive</h1>
-		<h2>Nombre: {Nombre del entrevistado}</h2>
+		<h2 data-bind="text: 'Nombre: ' + (currentInterviewee() == null? '' : currentInterviewee().intervieweeName)"></h2>
 		<div>
 			<form data-bind="submit: addInterviewee">
 			<label for="nameInput">Nombre</label>
@@ -22,12 +22,14 @@
 			
 			<input type="submit" value="Saludar">
 			</form>
+			<!-- ko if: currentInterviewee() != null -->
 			<p data-bind="text: currentWelcomeMessage"></p>
+			<!-- /ko -->
 		</div>
 		<div>
 			<p>Visitantes Anteriores</p>
 			<!-- ko foreach: listOfInterviewees -->
-				<div data-bind="text: intervieweeName + ' - ' + intervieweeCountry + ' - ' + intervieweeBirthdate"></div>
+				<div data-bind="text: intervieweeName + ' - ' + intervieweeCountry + ' - ' + intervieweeBirthdate.format('DD/MM/YYYY')"></div>
 			<!-- /ko -->
 		</div>
 	</body>
