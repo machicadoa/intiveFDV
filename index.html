@@ -1,0 +1,34 @@
+<html>
+	<head>
+		<link rel="stylesheet" href="resources/styles.css">
+		<script type='text/javascript' src="http://knockoutjs.com/downloads/knockout-3.4.2.js"></script>
+		<script type='text/javascript' src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script type='text/javascript' src="http://momentjs.com/downloads/moment.min.js"></script>
+		<script type='text/javascript' src="resources/myScript.js"></script>
+		<meta charset="UTF-8"> 
+		<title>Ejercicio Intive</title>
+	</head>
+	<body>
+		<h1>Ejercicio Intive</h1>
+		<h2>Nombre: {Nombre del entrevistado}</h2>
+		<div>
+			<form data-bind="submit: addInterviewee">
+			<label for="nameInput">Nombre</label>
+			<input type="text" name="name" id="nameInput" placeholder="Nombre">
+			<label for="countryInput">País</label>
+			<select name="country" id="countryInput" data-bind="options: countryCandidates, optionsText: 'name'"></select>
+			<label for="birthdateInput">Fecha de Nacimiento</label>
+			<input name="birthdate" id="birthdateInput" type="text" placeholder="dd/mm/yyyy">
+			
+			<input type="submit" value="Saludar">
+			</form>
+			<p data-bind="text: currentWelcomeMessage"></p>
+		</div>
+		<div>
+			<p>Visitantes Anteriores</p>
+			<!-- ko foreach: listOfInterviewees -->
+				<div data-bind="text: intervieweeName + ' - ' + intervieweeCountry + ' - ' + intervieweeBirthdate"></div>
+			<!-- /ko -->
+		</div>
+	</body>
+</html> 
